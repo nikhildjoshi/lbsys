@@ -57,9 +57,12 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='< $? >${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ ║'
+   # PS1='<$?>${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[00m\]\[\033[01;34m\]\h:\w\[\033[00m\]\$ '
+
+    PS1='\n\n\[\033[36m\]│EXIT: $?│\n├`printf "%*s" $(( $COLUMNS-1 )) "┤" | sed "s/ /=/g"` \n└─($(git branch 2>/dev/null | grep "\*" | sed s/\*//g) ) ${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\[\033[00m\]\[\033[01;34m\]\h:\[\033[00m\]\w\$ '
+
 else
-    PS1='\n\n│EXIT: $?│\n\[\033[38;5;8m\]├`printf "%*s" $(( $COLUMNS-1 )) "┤" | sed "s/ /─/g"` \[\033[00m\]\n└─┤$(git branch 2>/dev/null | grep "\*" | sed s/\*//g) ║${debian_chroot:+($debian_chroot)} \u@\H ║ \W\[\033[00m\]>$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -85,7 +88,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -95,6 +98,7 @@ alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -115,23 +119,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-##################################################
-#################################################
-###################nikhij custom#################
-#################################################
-#################################################
+##### nikhij config
+# Base16 Shell
+BASE16_SHELL="$HOME/git/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-BASE16_SHELL=$HOME/gitclone/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-export GOROOT=$HOME/tools/go
-export PATH=$HOME/tools/iw/bin:$PATH:$BRAZIL_CLI_BIN:~/amazon_tools/cr/bin:$GOROOT/bin
-echo ""
-cat ~/.message
-echo ""
-
-
-function nonzero_return() {
-	RETVAL=$?
-	[ $RETVAL -ne 0 ] && echo "$RETVAL"
-}
