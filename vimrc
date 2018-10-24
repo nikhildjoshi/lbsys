@@ -39,12 +39,15 @@ let g:clang_close_preview = 1
 let g:clang_periodic_quickfix = 1
 let g:clang_complete_copen = 1
 let g:clang_use_library = 1
+
 " =========================
 " === [ VIM GO SETTING] ===
 " =========================
+"let g:go_info_mode = 'gocode'
 "let g:go_gocode_autobuild = 1
-let g:go_gocode_unimported_packages = 0
-
+"let g:go_gocode_unimported_packages = 0
+"let g:go_version_warning = 0
+"let g:go_autodetect_gopath = 0
 " ==========================
 " === Vim project local ====
 " ==========================
@@ -66,7 +69,7 @@ set statusline+=%=
 set statusline+=%#PmenuSel#
 set statusline+=\ \ %{StatuslineGit()}\ \ 
 set statusline+=%#CursorColumn#
-set statusline+=\ \ \%t\ \ \%m
+set statusline+=\ \ \%t\%m\ 
 set statusline+=%#PmenuSel#
 set statusline+=\ \ \R\%l\ \│\ C\%c\ \ 
 set statusline+=%#CursorColumn#
