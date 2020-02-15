@@ -57,7 +57,7 @@ let g:clang_use_library = 1
 " ==========================
 function! GitBranch()
 	silent let f = system("git branch 2>&1 | grep \\* | cut -d ' ' -f 2 | tr -d '\n' ")
-	return strlen(f) > 0 ? '  '.f.'' : 'NOGIT'
+	return strlen(f) > 0 ? ' '.f.'' : 'NOGIT'
 endfunction
 
 function! StatuslineGit()
