@@ -93,9 +93,7 @@ fi
 
 if [ "$color_prompt" = yes ]; then
    # PS1='<$?>${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[00m\]\[\033[01;34m\]\h:\w\[\033[00m\]\$ '
-
-    PS1='\n\n\[\033[38m\]┏━━━━━┳━━━━━━━━┳━━━━━━━━━━┓\n┃ `printf "%3d" $?` ┃ `printf "%7s" "$(git symbolic-ref HEAD 2>/dev/null)" | tail -c 7 `┃ `date +"%0T"` ┃\n┗━━━━━┻━━━━━━━━┻━━━━━━━━━━┻`printf "%*s" $(( $COLUMNS-29 )) | sed "s/ /━/g"`┛ \n${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\[\033[00m\]\[\033[01;34m\]\h:\[\033[00m\]\w$ '
-
+    PS1='\n\n\[\033[38m\]┏─────┳────────┳──────────┓\n│ `printf "%3d" $?` │ `printf "%7s" "$(git symbolic-ref HEAD 2>/dev/null)" | tail -c 7 `│ `date +"%0T"` │\n┗─────┻────────┻──────────┻`printf "%*s" $(( $COLUMNS-29 )) | sed "s/ /─/g"`┛ \n${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\[\033[00m\]\[\033[01;34m\]\h:\[\033[00m\]\w$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
